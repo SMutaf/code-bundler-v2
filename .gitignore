@@ -1,0 +1,53 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Visual Studio
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / ReSharper
+.idea/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Test and coverage output
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+
+# NuGet
+packages/
+!packages/build/
+*.nupkg
+*.snupkg
+project.assets.json
+project.nuget.cache
+
+# Publish / deployment output
+publish/
+app.publish/
+
+# Logs
+*.log
+
+# Generated files
+Generated\ Files/
+*.cache
+
+# OS files
+Thumbs.db
+Desktop.ini
