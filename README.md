@@ -7,7 +7,7 @@ AI tools are helpful when writing, reviewing, or debugging code, but larger proj
 
 This application scans a project folder, lists the detected file extensions, lets you choose which ones to include, and combines only the selected user code files into one JSON output. This makes it much easier to give an AI the relevant parts of a project in one step.
 
-![App Screenshot](img/AppSS.png)
+![App Screenshot](img/AppSS_v2.png)
 
 ## Features
 - Scan a project folder and detect available file extensions
