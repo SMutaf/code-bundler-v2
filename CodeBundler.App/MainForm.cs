@@ -37,17 +37,14 @@ public partial class MainForm : Form
 
     private void browseOutputButton_Click(object sender, EventArgs e)
     {
-        using var dialog = new SaveFileDialog
+        using var dialog = new FolderBrowserDialog
         {
-            Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
-            DefaultExt = "json",
-            AddExtension = true,
-            FileName = "bundle.json"
+            Description = "Select the output folder."
         };
 
         if (dialog.ShowDialog(this) == DialogResult.OK)
         {
-            outputPathTextBox.Text = dialog.FileName;
+            outputPathTextBox.Text = dialog.SelectedPath;
         }
     }
 
@@ -122,7 +119,7 @@ public partial class MainForm : Form
             var request = new BundleRequest
             {
                 RootPath = projectPathTextBox.Text.Trim(),
-                OutputPath = outputPathTextBox.Text.Trim(),
+                OutputPath = BuildOutputFilePath(),
                 IncludedExtensions = selectedExtensions,
                 MinifyJson = minifyJsonCheckBox.Checked
             };
@@ -203,7 +200,19 @@ public partial class MainForm : Form
 
         if (string.IsNullOrWhiteSpace(outputPathTextBox.Text))
         {
-            message = "Output file is required.";
+            message = "Output folder is required.";
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(outputFileNameTextBox.Text))
+        {
+            message = "Please enter a file name.";
+            return false;
+        }
+
+        if (outputFileNameTextBox.Text.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+        {
+            message = "The file name contains invalid characters.";
             return false;
         }
 
@@ -282,9 +291,23 @@ public partial class MainForm : Form
         addExtensionButton.Enabled = !isBusy;
         manualExtensionTextBox.Enabled = !isBusy;
         extensionsCheckedListBox.Enabled = !isBusy;
+        outputFileNameTextBox.Enabled = !isBusy;
         selectAllExtensionsButton.Enabled = !isBusy;
         clearExtensionsButton.Enabled = !isBusy;
         bundleButton.Enabled = !isBusy;
         statusLabel.Text = statusText;
+    }
+
+    private string BuildOutputFilePath()
+    {
+        var folderPath = outputPathTextBox.Text.Trim();
+        var fileName = outputFileNameTextBox.Text.Trim();
+
+        if (!fileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+        {
+            fileName += ".json";
+        }
+
+        return Path.Combine(folderPath, fileName);
     }
 }

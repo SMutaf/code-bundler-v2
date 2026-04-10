@@ -15,6 +15,8 @@ partial class MainForm
     private TextBox outputPathTextBox = null!;
     private Button browseOutputButton = null!;
     private CheckBox minifyJsonCheckBox = null!;
+    private Label outputFileNameLabel = null!;
+    private TextBox outputFileNameTextBox = null!;
     private TableLayoutPanel extensionLayout = null!;
     private GroupBox extensionOptionsGroup = null!;
     private GroupBox extensionsListGroup = null!;
@@ -50,6 +52,8 @@ partial class MainForm
         outputPathTextBox = new TextBox();
         browseOutputButton = new Button();
         minifyJsonCheckBox = new CheckBox();
+        outputFileNameLabel = new Label();
+        outputFileNameTextBox = new TextBox();
         extensionLayout = new TableLayoutPanel();
         extensionOptionsGroup = new GroupBox();
         addExtensionButton = new Button();
@@ -82,13 +86,16 @@ partial class MainForm
         rootLayout.Controls.Add(outputPathTextBox, 1, 1);
         rootLayout.Controls.Add(browseOutputButton, 2, 1);
         rootLayout.Controls.Add(minifyJsonCheckBox, 3, 1);
-        rootLayout.Controls.Add(extensionLayout, 0, 2);
-        rootLayout.Controls.Add(bundleButton, 3, 3);
-        rootLayout.Controls.Add(statusLabel, 0, 4);
+        rootLayout.Controls.Add(outputFileNameLabel, 0, 2);
+        rootLayout.Controls.Add(outputFileNameTextBox, 1, 2);
+        rootLayout.Controls.Add(extensionLayout, 0, 3);
+        rootLayout.Controls.Add(bundleButton, 3, 4);
+        rootLayout.Controls.Add(statusLabel, 0, 5);
         rootLayout.Dock = DockStyle.Fill;
         rootLayout.Location = new Point(12, 12);
         rootLayout.Name = "rootLayout";
-        rootLayout.RowCount = 5;
+        rootLayout.RowCount = 6;
+        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -145,9 +152,9 @@ partial class MainForm
         outputPathLabel.AutoSize = true;
         outputPathLabel.Location = new Point(3, 50);
         outputPathLabel.Name = "outputPathLabel";
-        outputPathLabel.Size = new Size(87, 20);
+        outputPathLabel.Size = new Size(101, 20);
         outputPathLabel.TabIndex = 4;
-        outputPathLabel.Text = "Output Path";
+        outputPathLabel.Text = "Output Folder";
         //
         // outputPathTextBox
         //
@@ -164,7 +171,7 @@ partial class MainForm
         browseOutputButton.Name = "browseOutputButton";
         browseOutputButton.Size = new Size(104, 30);
         browseOutputButton.TabIndex = 6;
-        browseOutputButton.Text = "Save As...";
+        browseOutputButton.Text = "Browse...";
         browseOutputButton.UseVisualStyleBackColor = true;
         browseOutputButton.Click += browseOutputButton_Click;
         //
@@ -179,6 +186,25 @@ partial class MainForm
         minifyJsonCheckBox.Text = "Compact JSON";
         minifyJsonCheckBox.UseVisualStyleBackColor = true;
         //
+        // outputFileNameLabel
+        //
+        outputFileNameLabel.Anchor = AnchorStyles.Left;
+        outputFileNameLabel.AutoSize = true;
+        outputFileNameLabel.Location = new Point(3, 90);
+        outputFileNameLabel.Name = "outputFileNameLabel";
+        outputFileNameLabel.Size = new Size(84, 20);
+        outputFileNameLabel.TabIndex = 8;
+        outputFileNameLabel.Text = "File Name";
+        //
+        // outputFileNameTextBox
+        //
+        outputFileNameTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+        outputFileNameTextBox.Location = new Point(123, 86);
+        outputFileNameTextBox.Name = "outputFileNameTextBox";
+        outputFileNameTextBox.PlaceholderText = "my-bundle";
+        outputFileNameTextBox.Size = new Size(604, 27);
+        outputFileNameTextBox.TabIndex = 9;
+        //
         // extensionLayout
         //
         extensionLayout.ColumnCount = 2;
@@ -187,12 +213,12 @@ partial class MainForm
         extensionLayout.Controls.Add(extensionOptionsGroup, 0, 0);
         extensionLayout.Controls.Add(extensionsListGroup, 1, 0);
         extensionLayout.Dock = DockStyle.Fill;
-        extensionLayout.Location = new Point(3, 83);
+        extensionLayout.Location = new Point(3, 123);
         extensionLayout.Name = "extensionLayout";
         extensionLayout.RowCount = 1;
         extensionLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        extensionLayout.Size = new Size(954, 433);
-        extensionLayout.TabIndex = 8;
+        extensionLayout.Size = new Size(954, 393);
+        extensionLayout.TabIndex = 10;
         //
         // extensionOptionsGroup
         //
@@ -290,7 +316,7 @@ partial class MainForm
         bundleButton.Location = new Point(836, 529);
         bundleButton.Name = "bundleButton";
         bundleButton.Size = new Size(121, 34);
-        bundleButton.TabIndex = 9;
+        bundleButton.TabIndex = 11;
         bundleButton.Text = "Bundle";
         bundleButton.UseVisualStyleBackColor = true;
         bundleButton.Click += bundleButton_Click;
@@ -302,7 +328,7 @@ partial class MainForm
         statusLabel.Location = new Point(3, 568);
         statusLabel.Name = "statusLabel";
         statusLabel.Size = new Size(954, 23);
-        statusLabel.TabIndex = 10;
+        statusLabel.TabIndex = 12;
         statusLabel.Text = "Select a project folder to begin.";
         statusLabel.TextAlign = ContentAlignment.MiddleLeft;
         //
